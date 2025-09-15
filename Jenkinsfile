@@ -16,8 +16,14 @@ pipeline {
         }
         stage('Push the Docker image') {
             steps {
-                sh 'sudo docker image push alvinselva/devopsfirstcicd:latest'
-                sh 'sudo docker image push alvinselva/devopsfirstcicd:${BUILD_NUMBER}'
+                sh 'docker image push alvinselva/devopsfirstcicd:latest'
+                sh 'docker image push alvinselva/devopsfirstcicd:${BUILD_NUMBER}'
+            }
+        }
+        stage('Deploy on Kubernetes') {
+            steps {
+                sh 'sudo kubectl apply -f /var/lib/jenkins/workspace/Devops_First_CI_CD/deployment.yaml'
+                sh 'sudo kubectl rollout restart deployment loadbalancer-pod'
             }
         }
     }
