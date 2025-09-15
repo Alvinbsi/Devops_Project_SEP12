@@ -16,8 +16,8 @@ pipeline {
         }
         stage('Push the Docker image') {
             steps {
-                sh 'docker image push alvinselva/devopsfirstcicd:latest'
-                sh 'docker image push alvinselva/devopsfirstcicd:${BUILD_NUMBER}'
+                sh 'sudo docker image push alvinselva/devopsfirstcicd:latest'
+                sh 'sudo docker image push alvinselva/devopsfirstcicd:${BUILD_NUMBER}'
             }
         }
         stage('Deploy on Kubernetes') {
