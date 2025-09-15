@@ -14,5 +14,11 @@ pipeline {
                 sh 'docker tag devopsfirstcicd alvinselva/devopsfirstcicd:${BUILD_NUMBER}'
             }
         }
+        stage('Push the Docker image') {
+            steps {
+                sh 'sudo docker image push alvinselva/devopsfirstcicd:latest'
+                sh 'sudo docker image push alvinselva/devopsfirstcicd:${BUILD_NUMBER}'
+            }
+        }
     }
 }
