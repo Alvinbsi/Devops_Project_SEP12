@@ -7,5 +7,12 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/Alvinbsi/Devops_Project_SEP12.git'
             }
         }
+        stage('Build the Docker image') {
+            steps {
+                sh 'docker build -t devopsfirstcicd /var/lib/jenkins/workspace/Devops_First_CI_CD'
+                sh 'docker tag devopsfirstcicd alvinselva/devopsfirstcicd:latest'
+                sh 'docker tag devopsfirstcicd alvinselva/devopsfirstcicd:${BUILD_NUMBER}'
+            }
+        }
     }
 }
